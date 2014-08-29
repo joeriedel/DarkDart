@@ -1,0 +1,7 @@
+SetEnv no-gzip 1
+
+<IfModule mod_headers.c>
+	Header set Access-Control-Allow-Origin "*"
+	Header set Access-Control-Expose-Headers "Accept-Ranges, Content-Length, Content-Range"
+	Header set Access-Control-Allow-Headers "Range, Cache-Control, Accept-Encoding"
+</IfModule>

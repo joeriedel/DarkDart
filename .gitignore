@@ -1,0 +1,17 @@
+packages
+build/
+.pub/
+.project
+*.iml
+*.ipr
+*.iws
+.idea/
+*.dart.js
+*.js_
+*.js.deps
+*.js.map
+.buildlog
+DARK.GOB
+SOUNDS.GOB
+TEXTURES.GOB
+SPRITES.GOB
