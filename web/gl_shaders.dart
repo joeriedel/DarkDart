@@ -1,3 +1,4 @@
+library gl_shaders;
 import 'dart:web_gl' as webgl;
 
 class GLShaders {

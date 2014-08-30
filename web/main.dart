@@ -1,15 +1,18 @@
 import 'dart:html';
 import 'dart:typed_data';
+import 'dart:math' show Random;
 import 'dart:web_gl' as webgl;
 //import 'package:vector_math/vector_math.dart';
 import 'gl_canvas.dart';
+import 'gob.dart';
 
 void checkRequirements() {
   print('Checking server support of partial HTTP GET...');
   HttpRequest req = new HttpRequest();
   req..open('GET', 'http://www.joecodegood.net/darkdart/lorum.txt')
      ..setRequestHeader('Range', 'bytes=0-499')
-     ..onLoadEnd.listen((value) {
+     ..setRequestHeader('Cache-Control', 'no-cache')
+     ..onLoadEnd.listen((e) {
         print(req.status);
         print(req.statusText);
         if ((req.status == 200) || (req.status == 206)) {
@@ -62,24 +65,36 @@ class MainLoop {
   MainLoop(this.glCanvas);
   
   void start() {
-    window.requestAnimationFrame(_update);
+    window.animationFrame.then(_update);
   }
   
-  void _update(double elapsed) {
+  void _update(double time) {
     glCanvas.setViewport();
+    glCanvas.gl.clearColor(0, 0, 0, 1);
     glCanvas.gl.clear(webgl.RenderingContext.COLOR_BUFFER_BIT | webgl.RenderingContext.DEPTH_BUFFER_BIT);
-    window.requestAnimationFrame(_update);
+    window.animationFrame.then(_update);
   }
 }
 
-void main() {
+void _startMainLoop() {
   CanvasElement canvas = document.getElementById("gameViewport");
-  GLCanvas glCanvas = new GLCanvas(canvas);
-  
-  glCanvas.gl.clearColor(0, 0, 0, 1);
-  
-  MainLoop refresh = new MainLoop(glCanvas);
-  refresh.start();
+    GLCanvas glCanvas = new GLCanvas(canvas);
+    
+    MainLoop refresh = new MainLoop(glCanvas);
+    refresh.start();
+}
+
+void main() {
+  print("Entering main...");
+  //checkRequirements();
+  openGOB('/DARK.GOB')
+    .then((_) => openGOB('/SOUNDS.GOB'))
+    .then((_) => openGOB('/SPRITES.GOB'))
+    .then((_) => openGOB('/TEXTURES.GOB'))
+    .then((_) {
+      printGOBFiles();
+      _startMainLoop();
+    });
   
   //checkRequirements2();
   //HttpRequest.getString("files/myfile.txt").then((String fileContents) { print(fileContents); });

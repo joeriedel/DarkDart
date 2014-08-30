@@ -1,3 +1,4 @@
+library gl_canvas;
 import 'dart:html';
 import 'dart:web_gl' as webgl;
 import 'gl_shaders.dart';

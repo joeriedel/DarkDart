@@ -1,3 +1,4 @@
+library gl_texture;
 import 'dart:typed_data';
 import 'dart:web_gl' as webgl;
 
