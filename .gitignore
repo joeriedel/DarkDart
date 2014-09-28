@@ -11,7 +11,11 @@ build/
 *.js.deps
 *.js.map
 .buildlog
+Df_specs.GID
 DARK.GOB
 SOUNDS.GOB
 TEXTURES.GOB
 SPRITES.GOB
+GOBFILES/*
+GOB.exe
+ExtractGOBs.bat

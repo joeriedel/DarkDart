@@ -15,6 +15,9 @@ class ByteStream {
     return pos;
    }
    
+   bool get eos => ofs >= bytes.lengthInBytes;
+   int get length => bytes.lengthInBytes;
+   
    int getInt8() {
      return bytes.getInt8(_inc(1));
    }

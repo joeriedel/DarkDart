@@ -92,7 +92,7 @@ void main() {
     .then((_) => openGOB('/SPRITES.GOB'))
     .then((_) => openGOB('/TEXTURES.GOB'))
     .then((_) {
-      printGOBFiles();
+      //printGOBFiles();
       _startMainLoop();
     });
   
